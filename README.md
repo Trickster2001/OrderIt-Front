@@ -1,4 +1,4 @@
-# Frontend Project - OrderIt
+# Project - OrderIt Frontend
 
 ## Table of Contents
 - [Introduction](#introduction)
