@@ -8,6 +8,14 @@ const Navbar = () => {
   const authStatus = useSelector((state) => state.auth.status);
   console.log(authStatus)
 
+  const userData = useSelector((state) => state.auth.userData);
+  if(userData && userData?.isAdmin) {
+    console.log("user is admin")
+  } else {
+    console.log("user is not admin")
+  }
+  const adminStatus = userData?.isAdmin;
+
   const navItems = [
     {
       name: "Home",
@@ -25,14 +33,14 @@ const Navbar = () => {
       active: !authStatus
     },
     {
-      name: "All Posts",
-      slug: "/allPosts",
+      name: "All Orders",
+      slug: "/allOrders",
       active: authStatus
     },
     {
-      name: "Add Post",
-      slug: "/addpost",
-      active: authStatus
+      name: "Add Dish",
+      slug: "/addDish",
+      active: adminStatus
     }
   ]
 
@@ -46,8 +54,8 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className='bg-white sticky top-0 mb-6 z-0 font-semibold text-black border border-b shadow-md p-4 py-5 flex justify-between items-center sm:px-8'>
-      <div className='text-2xl text-orange-500 px-2'>Blogger</div>
+    <nav className='bg-white sticky top-0  z-0 font-semibold text-black border border-b shadow-md p-4 py-5 flex justify-between items-center sm:px-8'>
+      <div className='text-2xl text-orange-500 px-2'>OrderIt</div>
       <div className='sm:hidden text-xl cursor-pointer text-orange-500' onClick={toggleMenu}>Menu</div>
       <div className='hidden sm:block'>
       <ul className='flex gap-7 items-center'>

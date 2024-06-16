@@ -14,6 +14,7 @@ function App() {
     authApi.currentUser()
     .then((userData) => {
       if(userData) {
+        console.log("userdata is ", userData)
         dispatch(login({userData}));
       } else {
         console.log("no user")

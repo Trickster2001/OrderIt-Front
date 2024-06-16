@@ -6,6 +6,7 @@ import authApi from '../api/auth/auth';
 import {login as authLogin} from "../store/authSlice"
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Loader from '../components/Loader';
 
 const SignIn = () => {
 
@@ -14,22 +15,27 @@ const SignIn = () => {
     const dispatch = useDispatch();
     const [error, setError] = useState("");
 
+    const [loader, setLoader] = useState(false);
+
     const login = async (data) => {
         console.log("login data", data);
         setError("");
         try {
+          setLoader(true);
           const session = await authApi.login(data);
+          setLoader(false);
           console.log("session is", session)
           if (session) {
             console.log("Its here")
             const userData = await authApi.currentUser();
-            // console.log(userData);
+            console.log("userdata is ", userData);
             if (userData) {
               dispatch(authLogin({ userData }));
             }
             navigate("/");
           }
         } catch (error) {
+          setLoader(false)
           console.log("error is in signIn", error);
           setError(error.message);
         }
@@ -44,6 +50,9 @@ const SignIn = () => {
         </h1>
 
         {error && <p>{error}</p>}
+
+        {loader && <Loader/>}
+
         <form onSubmit={handleSubmit(login)}>
           <Input
             className="mb-2"

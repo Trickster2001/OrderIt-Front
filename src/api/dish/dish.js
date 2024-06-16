@@ -8,7 +8,7 @@ const getAllDishes = async () => {
 }
 
 const getOneDish = async (dishId) => {
-    const response = await axios.get(`${API_URL}/getOneDish/${dishId}`);
+    const response = await axios.get(`${API_URL}/d/${dishId}`);
     return response.data;
 }
 

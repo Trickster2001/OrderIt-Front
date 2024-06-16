@@ -7,6 +7,11 @@ import Home from './pages/Home.jsx'
 import {Provider} from "react-redux"
 import store from "./store/store.js"
 import SignIn from './pages/SignIn.jsx'
+import SignUp from './pages/SignUp.jsx'
+import AllOrders from './pages/AllOrders.jsx'
+import SingleDish from './pages/SingleDish.jsx'
+import AuthLayout from './components/AuthLayout.jsx'
+import AddDish from './pages/AddDish.jsx'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +24,43 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <SignIn />
+        element: (
+          <AuthLayout authentication={false}>
+                <SignIn />
+          </AuthLayout>
+        ),
+    },
+    {
+        path: "/signup",
+        element: (
+          <AuthLayout authentication={false}>
+                <SignUp />
+          </AuthLayout>
+        ),
+    },
+      {
+        path: "/allOrders",
+        element: (
+          <AuthLayout authentication>
+                <AllOrders />
+          </AuthLayout>
+        )
+      },
+      {
+        path: "/singleDish/:dishId",
+        element: (
+          <AuthLayout authentication>
+                <SingleDish />
+          </AuthLayout>
+        )
+      },
+      {
+        path: "/addDish",
+        element: (
+          <AuthLayout authentication>
+                <AddDish />
+          </AuthLayout>
+        )
       }
     ]
   }
